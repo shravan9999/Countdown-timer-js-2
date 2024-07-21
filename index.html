@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Counter!</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="countdown-container">
+        <div class="countdown-timer" id="countdown-label"> Until 2025 </div>
+    </div>
+    <script>
+        const targetDate = new Date('2024-08-15T00:00:00')
+
+        function updateCountdown(){
+            const currentDate = new Date()
+            const timeDiff = targetDate - currentDate
+            console.log(timeDiff)
+            const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24))
+            const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+            const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60))
+            const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000)
+            document.getElementById('countdown-label').innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`
+
+            // Check if countdown is over
+            if(timeDiff < 0){
+                clearInterval(countdownInterval)
+                document.getElementById('countdown-label').textContent = 'Countdown Over!'
+            }
+            countdownInterval = setTimeout(updateCountdown, 1000)
+            // Update the countdown every second
+
+        }
+        updateCountdown()
+    </script>
+    
+</body>
+</html>
